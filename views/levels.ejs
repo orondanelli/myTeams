@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+		<!-- Basic -->
+		<meta charset="UTF-8">
+
+		<title>Niveles | crear</title>
+		<meta name="keywords" content="HTML5 Admin Template" />
+		<meta name="description" content="Porto Admin - Responsive HTML5 Template">
+		<meta name="author" content="okler.net">
+
+		<!-- Mobile Metas -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+		<!-- Web Fonts  -->
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800|Shadows+Into+Light" rel="stylesheet" type="text/css">
+
+		<!-- Vendor CSS -->
+		<link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.css" />
+		<link rel="stylesheet" href="/vendor/animate/animate.css">
+
+		<link rel="stylesheet" href="/vendor/font-awesome/css/font-awesome.css" />
+		<link rel="stylesheet" href="/vendor/magnific-popup/magnific-popup.css" />
+		<link rel="stylesheet" href="/vendor/bootstrap-datepicker/css/bootstrap-datepicker3.css" />
+
+		<!-- Theme CSS -->
+		<link rel="stylesheet" href="/css/theme.css" />
+
+		<!-- Skin CSS -->
+		<link rel="stylesheet" href="/css/skins/default.css" />
+
+		<!-- Theme Custom CSS -->
+		<link rel="stylesheet" href="/css/custom.css">
+
+		<!-- Head Libs -->
+		<script src="/vendor/modernizr/modernizr.js"></script>
+        <script src="/vendor/jquery/jquery.js"></script>
+      
+        <script>
+            $( document ).ready(function() {
+                document.getElementById("inputLevelName").focus();
+                $('#exitoPopup').delay(1000).fadeOut('slow');
+            });
+            
+    </script>
+	</head>
+  <body>
+<section class="body">
+<span class="separator"></span>
+    <div class="col-lg-12">
+	<section class="card">
+		<header class="card-header">
+			<div class="card-actions">
+				<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+				<a href="#" class="card-action card-action-dismiss" data-card-dismiss></a>
+			</div>
+
+			<h2 class="card-title">Crear Nivel</h2>
+			<p class="card-subtitle">
+				crear un  <code>nivel</code> de madurez.
+			</p>
+		</header>
+		<div class="card-body">
+			
+			<form class="form-inline" action="/nivel/create" method="post">
+				<label class="sr-only" for="inlineFormInputName2">Nombre</label>
+				<input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inputLevelName" name="levelName" placeholder="FireTeam">
+				<button type="submit" class="btn btn-primary">Enviar</button>
+			</form>
+		</div>
+        <% if(typeof exito == 'undefined'){ %>
+                    
+        <% } else if (exito == 1){ %>  
+        <div class="alert alert-success" id="exitoPopup">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            <strong>Well done!</strong> You are using an awesome template! <a href="" class="alert-link">Say Hi to Porto Admin</a>.
+        </div>
+        <% } %>
+	</section>
+</div>
+    <table class="table table-responsive-md table-sm mb-0 compact" id="tabla-detalle">
+						<thead>
+							<tr>
+								<th>Nombre</th>
+							</tr>
+						</thead>
+					<tbody>
+    <% if(locals.arraylevels) { %>
+    <% arraylevels.forEach( function( result ) { %>
+        <tr>
+        <td><%= result.levelName %></td>
+        <% }) %>
+    <% } %>
+</tbody>
+    </table>
+</section>
+
+</body>
+</html>
