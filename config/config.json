@@ -3,6 +3,7 @@
     "username": "postgres",
     "password": "pegote",
     "database": "myteams-development",
+    "host": "localhost",
     "dialect": "postgresql"
   },
   "test": {

@@ -7,23 +7,26 @@ var session = require('express-session');
 router.get('/',function(req, res) {
    models.Level.findAll()
     .then(function(level) {
-        models.Team.findAll()
+        models.Team.findAll({include: [models.Level]})
             .then(function(teams) {
                 res.render('teams',{arrayTeams: teams,arrayLevels:level});
-            console.log(level);
+            console.log(teams);
             });
     });
 });
-    //models.Team.findAll({include: [models.Level]}) 
+    //models.Team.findAll({include: [models.Level]})
 
 
 router.post('/create', function(req, res, next) {
   models.Team.create({
-    teamName: req.body.teamName
+    teamName: req.body.teamName,
+    currentLevelInd: 'X',
+    LevelId: req.body.selectLevelName
   }).then(function() {
+        console.log(req.body.selectLevelName);
     res.redirect('/equipos');
     //res.render('teams',{exito:1, message: req.flash('success_messages')});
-      
+
   });
 });
 

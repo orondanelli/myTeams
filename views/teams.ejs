@@ -36,13 +36,13 @@
 		<!-- Head Libs -->
 		<script src="/vendor/modernizr/modernizr.js"></script>
         <script src="/vendor/jquery/jquery.js"></script>
-      
+
         <script>
             $( document ).ready(function() {
                 document.getElementById("inputTeamName").focus();
                 $('#exitoPopup').delay(1000).fadeOut('slow');
             });
-            
+
     </script>
 	</head>
   <body>
@@ -62,14 +62,14 @@
 			</p>
 		</header>
 		<div class="card-body">
-			
+
 			<form class="form-inline" action="/equipos/create" method="post">
 				<label class="sr-only" for="inlineFormInputName2">Nombre</label>
 				<input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inputTeamName" name="teamName" placeholder="BI-Ops">
-                <select class="form-control mb-2 mr-sm-2 mb-sm-0">
+                <select class="form-control mb-2 mr-sm-2 mb-sm-0" name="selectLevelName">
                     <% if(locals.arrayLevels) { %>
                         <% arrayLevels.forEach( function( result ) { %>
-                            <option><%= result.levelName %></option>
+                            <option value="<%= result.id%>"><%= result.levelName %></option>
                         <% }) %>
                     <% } %>
                 </select>
@@ -77,14 +77,14 @@
 			</form>
 		</div>
         <% if(typeof exito == 'undefined'){ %>
-                    
-        <% } else if (exito == 1){ %>  
+
+        <% } else if (exito == 1){ %>
         <div class="alert alert-success" id="exitoPopup">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
             <strong>Creado!</strong> You are using an awesome template! <a href="" class="alert-link">Say Hi to Porto Admin</a>.
         </div>
         <% } %>
-	</section>    
+	</section>
 </div>
 
 <div class="col-lg-12">
@@ -94,7 +94,7 @@
 											<a href="#" class="card-action card-action-toggle" data-card-toggle=""></a>
 											<a href="#" class="card-action card-action-dismiss" data-card-dismiss=""></a>
 										</div>
-						
+
 										<h2 class="card-title">Actions</h2>
 									</header>
 									<div class="card-body">
@@ -102,26 +102,29 @@
 											<thead>
 												<tr>
 													<th>Nombre</th>
+                          <th>Nivel Actual</th>
 													<th>Actions</th>
 												</tr>
 											</thead>
 											<tbody>
-                                                <% if(locals.arrayTeams) { %>
-                                                    <% arrayTeams.forEach( function( result ) { %>
-                                                        <tr>
-													       <td><%= result.teamName %></td>
-													       <td class="actions">
-													       	   <a href=""><i class="fa fa-pencil"></i></a>
-                                                               <a href="equipos/<%= result.id %>/delete" class="delete-row"><i class="fa fa-trash-o"></i></a>
-													       </td>
-                                                            <% }) %>
-                                                        <% } %>
+                        <% if(locals.arrayTeams) { %>
+                          <% arrayTeams.forEach( function( result ) { %>
+                            <tr>
+							                 <td><%= result.teamName %></td>
+                               <td><%= result.Level.levelName %></td>
+												       <td class="actions">
+										       	     <a href=""><i class="fa fa-pencil"></i></a>
+                                 <a href="equipos/<%= result.id %>/delete" class="delete-row"><i class="fa fa-trash-o"></i></a>
+												       </td>
+                           <% }) %>
+                         <% } %>
 												        </tr>
 											</tbody>
 										</table>
 									</div>
 								</section>
 							</div>
+              <!-- Nested loop below -->
 </section>
  </body>
 </html>
