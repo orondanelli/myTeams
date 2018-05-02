@@ -40,4 +40,19 @@ router.get('/:team_id/delete', function(req, res) {
   });
 });
 
+router.put('/:team_id/update', function (req, res, next) {
+  console.log('entro');
+ models.Team.update({
+   teamName: req.body.teamName,
+   currentLevelInd: 'X',
+   LevelId: req.body.selectLevelName},
+   {where: req.params.team_id}
+ )
+ .then(function(rowsUpdated) {
+   res.redirect('/equipos');
+   console.log(req.params.team_id)
+ })
+ .catch(next)
+})
+
 module.exports = router;

@@ -44,6 +44,7 @@ Theme Version: 	2.0.0
 			this.datatable = this.$table.DataTable({
 				dom: '<"row"<"col-lg-6"l><"col-lg-6"f>><"table-responsive"t>p',
 				aoColumns: [
+					{"visible": true},
 					null,
 					null,
 					{ "bSortable": false}
@@ -194,7 +195,7 @@ Theme Version: 	2.0.0
 				if ( $this.hasClass('actions') ) {
 					_self.rowSetActionsEditing( $row );
 				} else {
-					if($this.hasClass('actionName')){
+					if($this.hasClass('actionName') ||$this.hasClass('actionId')){
 						$this.html( '<input type="text" class="form-control input-block" value="' + data[i] + '"/>' );
 					} else {
 //					$this.html( '<input type="text" class="form-control input-block" value="' + data[i] + '"/>' );
