@@ -195,7 +195,7 @@ Theme Version: 	2.0.0
 				if ( $this.hasClass('actions') ) {
 					_self.rowSetActionsEditing( $row );
 				} else {
-					if($this.hasClass('actionName') ||$this.hasClass('actionId')){
+					if($this.hasClass('actionName') || $this.hasClass('actionId')){
 						$this.html( '<input type="text" class="form-control input-block" value="' + data[i] + '"/>' );
 					} else {
 //					$this.html( '<input type="text" class="form-control input-block" value="' + data[i] + '"/>' );

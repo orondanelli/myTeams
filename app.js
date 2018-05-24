@@ -6,7 +6,7 @@ const logger = require('morgan');
 const Sequelize = require('sequelize');
 const flash = require('express-flash');
 const session = require('express-session');
-
+const methodOverride = require('method-override')
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var teamsRouter = require('./routes/teams');
@@ -53,12 +53,19 @@ app.use(session({
   saveUninitialized: true,
   cookie: { secure: true }
 }));
-app.use(flash());
+app.use(methodOverride(function (req, res) {
+  if (req.body && typeof req.body === 'object' && '_method' in req.body) {
+    // look in urlencoded POST bodies and delete it
+    var method = req.body._method
+    delete req.body._method
+    return method
+  }
+}))
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/equipos', teamsRouter);
-app.use('/nivel', levelRouter);
+app.use('/niveles', levelRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

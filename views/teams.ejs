@@ -41,6 +41,11 @@
 		<!-- Head Libs -->
 		<script src="/vendor/modernizr/modernizr.js"></script>
 
+<!-- Data Tables -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jqc-1.12.3/dt-1.10.16/b-1.5.1/sl-1.2.5/datatables.min.css"/>
+
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/jqc-1.12.3/dt-1.10.16/b-1.5.1/sl-1.2.5/datatables.min.js"></script>
+
 	</head>
   <body>
 <section class="body">
@@ -63,6 +68,7 @@
 			<form class="form-inline" action="/equipos/create" method="post">
 				<label class="sr-only" for="inlineFormInputName2">Nombre</label>
 				<input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inputTeamName" name="teamName" placeholder="BI-Ops">
+<!--
                 <select class="form-control mb-2 mr-sm-2 mb-sm-0" name="selectLevelName">
                     <% if(locals.arrayLevels) { %>
                         <% arrayLevels.forEach( function( result ) { %>
@@ -70,6 +76,13 @@
                         <% }) %>
                     <% } %>
                 </select>
+-->
+        <select class="form-control mb-2 mr-sm-2 mb-sm-0" name="selectAreaName">
+          <option value="Operaciones TI">Operaciones TI</option>
+          <option value="Centro Competencias">Centro Competencias</option>
+          <option value="Tecnología">Tecnología</option>
+          <option value="Seguridad Informática">Seguridad Informática</option>
+        </select>
 				<button type="submit" class="btn btn-primary">Enviar</button>
 			</form>
 		</div>
@@ -92,7 +105,7 @@
                         <tr>
                           <th>Id </th>
                           <th>Nombre</th>
-                          <th>Nivel Actual</th>
+                          <th>Área</th>
                           <th>Actions</th>
                         </tr>
                       </thead>
@@ -102,11 +115,11 @@
                             <tr>
                               <td class="actionId" name="Teamid"><%= result.id %></td>
                                <td class="actionName"><%= result.teamName %></td>
-                               <td class="actionLevel"><%= result.Level.levelName %></td>
+                               <td class="actionLevel"><%= result.areaName %></td>
                                <td class="actions">
-                                <a href="equipos/<%= result.id %>/update" class="hidden on-editing save-row"><i class="fa fa-save"></i></a>
+                                <a href="equipos/<%= result.id %>/update" class="hidden on-editing save-row select_link" ><i class="fa fa-save"></i></a>
                                 <a href="#" class="hidden on-editing cancel-row"><i class="fa fa-times"></i></a>
-                                <a href="#" class="on-default edit-row"><i class="fa fa-pencil"></i></a>
+                                <a href="/equipos/<%= result.id %>/update" class="on-default edit-row"><i class="fa fa-pencil"></i></a>
                                 <a href="equipos/<%= result.id %>/delete" class="on-default remove-row"><i class="fa fa-trash-o"></i></a>
                               </td>
                             </tr>
@@ -166,12 +179,14 @@
 <script src="/js/theme.init.js"></script>
 
 <!-- Examples -->
-<script src="/js/datatables.editable.team.js"></script>
 <script>
     $( document ).ready(function() {
         document.getElementById("inputTeamName").focus();
+        $('#datatable-editable').DataTable( {
+          select: true
+        } );
     });
-
 </script>
+
 </body>
 </html>
