@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+		<!-- Basic -->
+		<meta charset="UTF-8">
+
+		<title>Criterios | crear</title>
+		<meta name="keywords" content="HTML5 Admin Template" />
+		<meta name="description" content="Porto Admin - Responsive HTML5 Template">
+		<meta name="author" content="okler.net">
+
+		<!-- Mobile Metas -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <!-- Web Fonts  -->
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800|Shadows+Into+Light" rel="stylesheet" type="text/css">
+
+		<!-- Vendor CSS -->
+		<link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.css" />
+		<link rel="stylesheet" href="/vendor/animate/animate.css">
+
+		<link rel="stylesheet" href="/vendor/font-awesome/css/font-awesome.css" />
+		<link rel="stylesheet" href="/vendor/magnific-popup/magnific-popup.css" />
+		<link rel="stylesheet" href="/vendor/bootstrap-datepicker/css/bootstrap-datepicker3.css" />
+
+		<!-- Specific Page Vendor CSS -->
+		<link rel="stylesheet" href="/vendor/select2/css/select2.css" />
+		<link rel="stylesheet" href="/vendor/select2-bootstrap-theme/select2-bootstrap.min.css" />
+		<link rel="stylesheet" href="/vendor/datatables/media/css/dataTables.bootstrap4.css" />
+
+		<!-- Theme CSS -->
+		<link rel="stylesheet" href="/css/theme.css" />
+
+		<!-- Skin CSS -->
+		<link rel="stylesheet" href="/css/skins/default.css" />
+
+		<!-- Theme Custom CSS -->
+		<link rel="stylesheet" href="/css/custom.css">
+
+		<!-- Head Libs -->
+		<script src="/vendor/modernizr/modernizr.js"></script>
+
+<!-- Data Tables -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jqc-1.12.3/dt-1.10.16/b-1.5.1/sl-1.2.5/datatables.min.css"/>
+
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/jqc-1.12.3/dt-1.10.16/b-1.5.1/sl-1.2.5/datatables.min.js"></script>
+
+	</head>
+  <body>
+<section class="body">
+<span class="separator"></span>
+    <div class="col-lg-12">
+	<section class="card">
+		<header class="card-header">
+			<div class="card-actions">
+				<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+				<a href="#" class="card-action card-action-dismiss" data-card-dismiss></a>
+			</div>
+
+			<h2 class="card-title">Crear Criterio</h2>
+			<p class="card-subtitle">
+				crear un  <code>criterio</code> del playbook.
+			</p>
+		</header>
+		<div class="card-body">
+			<form class="form-horizontal" action="/criterios/create" method="post">
+				<div class="card-body">
+					<div class="form-group row">
+						<label class="col-sm-2 control-label text-sm-left pt-2">Nivel:</label>
+						<div class="col-sm-3">
+							<select class="form-control mb-2 mr-sm-2 mb-sm-0" name="selectLevelName">
+								<% if(locals.arrayLevels) { %>
+								<% arrayLevels.forEach( function( result ) { %>
+								<option value="<%= result.id%>"><%= result.levelName %></option>
+								<% }) %>
+								<% } %>
+							</select>
+						</div>
+					</div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 control-label text-sm-left pt-2">Principio:</label>
+                        <div class="col-sm-3">
+                            <select class="form-control mb-2 mr-sm-2 mb-sm-0" name="selectPrincipleName">
+                                <option value="P1">Principio 1</option>
+                                <option value="P2">Principio 2</option>
+                                <option value="P3">Principio 3</option>
+                                <option value="P4">Principio 4</option>
+                            </select>
+                        </div>
+                    </div>
+					<div class="form-group row">
+						<label class="col-sm-2 control-label text-sm-left pt-2">Nombre:</label>
+						<div class="col-sm-3">
+							<input type="text" name="textNameCriteria" class="form-control" placeholder="Preparación para la inception">
+						</div>
+					</div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 control-label text-sm-left pt-2">Valor Requerido:</label>
+                        <div class="col-sm-3">
+                            <select class="form-control mb-2 mr-sm-2 mb-sm-0" name="selectOficialValue">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                        </div>
+                    </div>
+				</div>
+				<footer class="card-footer text-right">
+					<button class="btn btn-primary">Enviar </button>
+					<button type="reset" class="btn btn-default">Limpiar</button>
+				</footer>
+			</form>
+		</div>
+	</section>
+</div>
+    <div class="col-lg-12">
+        <section class="card">
+            <header class="card-header">
+                <div class="card-actions">
+                    <a href="#" class="card-action card-action-toggle" data-card-toggle=""></a>
+                    <a href="#" class="card-action card-action-dismiss" data-card-dismiss=""></a>
+                </div>
+
+        <h2 class="card-title">Actions</h2>
+            </header>
+            <div class="card-body">
+                <table class="table table-responsive-md mb-0" id="datatable-level">
+                    <thead>
+                    <tr>
+                        <th>Nivel</th>
+                        <th>Principio</th>
+                        <th>Criterio</th>
+                        <th>Valor</th>
+                        <th>Acciones</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <% if(locals.arrayCriteria) { %>
+                    <% arrayCriteria.forEach( function( result ) { %>
+                    <tr>
+                        <td class="actionName"><%= result.Level.levelName %></td>
+                        <td class="actionLevel"><%= result.principleName%></td>
+                        <td class="actionLevel"><%= result.criteriaName%></td>
+                        <td class="actionLevel"><%= result.officialValueNum%></td>
+                        <td class="actions">
+                            <a href="/niveles/<%= result.id %>/update" class="on-default edit-row"><i class="fa fa-pencil"></i></a>
+                            <a href="/niveles/<%= result.id %>/delete" class="on-default remove-row"><i class="fa fa-trash-o"></i></a>
+                        </td>
+                    </tr>
+                    <% }) %>
+                    <div id="dialog" class="modal-block mfp-hide">
+                        <section class="card">
+                            <header class="card-header">
+                                <h2 class="card-title">Estás seguro?</h2>
+                            </header>
+                            <div class="card-body">
+                                <div class="modal-wrapper">
+                                    <div class="modal-text">
+                                        <p>Estás seguro que quieres eliminar esta fila?</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <footer class="card-footer">
+                                <div class="row">
+                                    <div class="col-md-12 text-right">
+                                        <button id="dialogConfirm" class="btn btn-primary">Confirmar</button>
+                                        <button id="dialogCancel" class="btn btn-default">Cancelar</button>
+                                    </div>
+                                </div>
+                            </footer>
+                        </section>
+                    </div>
+                    <% } %>
+                    </tbody>
+                </table>
+            </div>
+
+</section>
+<!-- Vendor -->
+<script src="/vendor/jquery/jquery.js"></script>
+		<script src="/vendor/jquery-browser-mobile/jquery.browser.mobile.js"></script>
+		<script src="/vendor/popper/umd/popper.min.js"></script>
+		<script src="/vendor/bootstrap/js/bootstrap.js"></script>
+		<script src="/vendor/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+		<script src="/vendor/common/common.js"></script>
+		<script src="/vendor/nanoscroller/nanoscroller.js"></script>
+		<script src="/vendor/magnific-popup/jquery.magnific-popup.js"></script>
+		<script src="/vendor/jquery-placeholder/jquery-placeholder.js"></script>
+
+<!-- Specific Page Vendor -->
+		<script src="/vendor/select2/js/select2.js"></script>
+		<script src="/vendor/datatables/media/js/jquery.dataTables.min.js"></script>
+		<script src="/vendor/datatables/media/js/dataTables.bootstrap4.min.js"></script>
+
+<!-- Theme Base, Components and Settings -->
+<script src="/js/theme.js"></script>
+
+<!-- Theme Custom -->
+<script src="/js/custom.js"></script>
+
+<!-- Theme Initialization Files -->
+<script src="/js/theme.init.js"></script>
+
+<!-- Examples -->
+<script>
+    $( document ).ready(function() {
+        document.getElementById("inputTeamName").focus();
+        $('#datatable-editable').DataTable( {
+          select: true
+        } );
+    });
+</script>
+
+</body>
+</html>

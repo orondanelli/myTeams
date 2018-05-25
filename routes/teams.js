@@ -3,20 +3,10 @@ const express = require('express');
 const router  = express.Router();
 
 router.get('/',function(req, res) {
-    models.Level.findAll()
-        .then(function() {
-            models.Team.findAll({})
-                .then(function(teams) {
-                    res.render('teams',{arrayTeams: teams});
-                    console.log(teams);
-                });
-            /*
-              models.Team.findAll({include: [models.Level]})
-                  .then(function(teams) {
-                      res.render('teams',{arrayTeams: teams,arrayLevels:level});
-                  console.log(teams);
-                  });
-                */
+    models.Team.findAll({})
+        .then(function(teams) {
+            res.render('teams',{arrayTeams: teams});
+            console.log(teams);
         });
 });
 //models.Team.findAll({include: [models.Level]})

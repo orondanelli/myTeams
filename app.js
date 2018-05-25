@@ -11,6 +11,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var teamsRouter = require('./routes/teams');
 var levelRouter = require('./routes/level');
+var criteriaRouter = require('./routes/criteria');
 
 var app = express();
 var sessionStore = new session.MemoryStore;
@@ -62,10 +63,11 @@ app.use(methodOverride(function (req, res) {
   }
 }))
 
-app.use('/', indexRouter);
+app.use('/', indexRouter);  
 app.use('/users', usersRouter);
 app.use('/equipos', teamsRouter);
 app.use('/niveles', levelRouter);
+app.use('/criterios', criteriaRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -90,4 +92,4 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-module.exports = app;
+module.exports = app

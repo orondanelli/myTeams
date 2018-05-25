@@ -65,79 +65,37 @@
 		</header>
 		<div class="card-body">
 			
-			<form class="form-inline" action="/niveles/create" method="post">
+			<form class="form-inline" action="/niveles/<%= JSON.parse(arrayLevels).id %>/update" method="post">
 				<label class="sr-only" for="inlineFormInputName2">Nombre</label>
-				<input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inputLevelName" name="levelName" placeholder="FireTeam">
+				<input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inputLevelName" name="levelName" value="<%=JSON.parse(arrayLevels).levelName %>">
 				<select class="form-control mb-2 mr-sm-2 mb-sm-0" name="selectPriorityLevel">
-					<option value="1">1</option>
+					<% if (JSON.parse(arrayLevels).levelpriority == 1) { %>
+						<option value="1" selected >1</option>
+					<% } else{ %>
+						<option value="1">1</option>
+					<% } %>
+					<% if (JSON.parse(arrayLevels).levelpriority == 2) { %>
+					<option value="2" selected >2</option>
+					<% } else{ %>
 					<option value="2">2</option>
+					<% } %>
+					<% if (JSON.parse(arrayLevels).levelpriority == 3) { %>
+					<option value="3" selected >3</option>
+					<% } else{ %>
 					<option value="3">3</option>
+					<% } %>
+					<% if (JSON.parse(arrayLevels).levelpriority == 4) { %>
+					<option value="4" selected >4</option>
+					<% } else{ %>
 					<option value="4">4</option>
-				</select>
+					<% } %>
+					</select>
+                <input type="hidden" name="_method" value="PUT">
 				<button type="submit" class="btn btn-primary">Enviar</button>
 			</form>
 		</div>
 	</section>
 </div>
-	<div class="col-lg-12">
-		<section class="card">
-			<header class="card-header">
-				<div class="card-actions">
-					<a href="#" class="card-action card-action-toggle" data-card-toggle=""></a>
-					<a href="#" class="card-action card-action-dismiss" data-card-dismiss=""></a>
-				</div>
-
-				<h2 class="card-title">Actions</h2>
-			</header>
-			<div class="card-body">
-				<table class="table table-responsive-md mb-0" id="datatable-level">
-					<thead>
-					<tr>
-						<th>Nombre</th>
-						<th>Prioridad</th>
-						<th>Actions</th>
-					</tr>
-					</thead>
-					<tbody>
-					<% if(locals.arraylevels) { %>
-					<% arraylevels.forEach( function( result ) { %>
-					<tr>
-						<td class="actionName"><%= result.levelName %></td>
-						<td class="actionLevel"><%= result.levelpriority %></td>
-						<td class="actions">
-							<a href="/niveles/<%= result.id %>/update" class="on-default edit-row"><i class="fa fa-pencil"></i></a>
-							<a href="/niveles/<%= result.id %>/delete" class="on-default remove-row"><i class="fa fa-trash-o"></i></a>
-						</td>
-					</tr>
-					<% }) %>
-					<div id="dialog" class="modal-block mfp-hide">
-						<section class="card">
-							<header class="card-header">
-								<h2 class="card-title">Estás seguro?</h2>
-							</header>
-							<div class="card-body">
-								<div class="modal-wrapper">
-									<div class="modal-text">
-										<p>Estás seguro que quieres eliminar esta fila?</p>
-									</div>
-								</div>
-							</div>
-							<footer class="card-footer">
-								<div class="row">
-									<div class="col-md-12 text-right">
-										<button id="dialogConfirm" class="btn btn-primary">Confirmar</button>
-										<button id="dialogCancel" class="btn btn-default">Cancelar</button>
-									</div>
-								</div>
-							</footer>
-						</section>
-					</div>
-					<% } %>
-					</tbody>
-				</table>
-			</div>
-		</section>
-	</div>
 </section>
 
 <!-- Vendor -->
